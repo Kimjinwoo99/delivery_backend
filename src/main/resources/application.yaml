@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: delivery
+
+  datasource:
+    url: jdbc:postgresql://localhost:15432/delivery
+    username: delivery
+    password: delivery1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  # 학습용 더미 키. HS256은 32바이트 이상이어야 한다. 실제 키는 환경변수 JWT_SECRET 으로 주입한다.
+  secret: ${JWT_SECRET:delivery-dummy-secret-key-for-study-only-0123456789}
+  expiration-ms: 3600000
