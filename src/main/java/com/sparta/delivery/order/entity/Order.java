@@ -60,4 +60,26 @@ public class Order extends BaseEntity {
         this.deliveryAddress = deliveryAddress;
         this.status = OrderStatus.ORDERED;
     }
+
+    // 상태 전이가 허용되는지는 서비스가 확인하고, 여기서는 값만 바꾼다.
+    public void cancel() {
+        this.status = OrderStatus.CANCELED;
+    }
+
+    public void accept() {
+        this.status = OrderStatus.ACCEPTED;
+    }
+
+    public void complete() {
+        this.status = OrderStatus.COMPLETED;
+    }
+
+    public boolean isOrderedBy(String username) {
+        return customer.getUsername().equals(username);
+    }
+
+    // 이 주문이 들어온 메뉴의 주인(사장님)인지
+    public boolean isReceivedBy(String ownerUsername) {
+        return menu.isOwnedBy(ownerUsername);
+    }
 }
