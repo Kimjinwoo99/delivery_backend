@@ -50,4 +50,19 @@ public class Menu extends BaseEntity {
         this.price = price;
         this.description = description;
     }
+
+    public void update(String name, int price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
+
+    // 실제로 지우지 않고 삭제 시각만 기록한다. 주문 기록이 이 메뉴를 계속 가리킬 수 있어야 한다.
+    public void delete() {
+        this.deletedAt = LocalDateTime.now();
+    }
+
+    public boolean isOwnedBy(String username) {
+        return owner.getUsername().equals(username);
+    }
 }
