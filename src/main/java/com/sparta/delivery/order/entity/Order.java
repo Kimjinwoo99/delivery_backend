@@ -62,6 +62,10 @@ public class Order extends BaseEntity {
     }
 
     // 상태 전이가 허용되는지는 서비스가 확인하고, 여기서는 값만 바꾼다.
+    public void pay() {
+        this.status = OrderStatus.PAID;
+    }
+
     public void cancel() {
         this.status = OrderStatus.CANCELED;
     }
