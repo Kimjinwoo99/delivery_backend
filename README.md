@@ -128,4 +128,20 @@ src/main/java/com/sparta/delivery
 
 ## 테스트 시나리오
 
-과제의 필수 기능 12개를 Postman에서 순서대로 확인할 수 있는 시나리오는 과제 문서 5-1을 따릅니다. 요청 본문에 한글이 들어가면 UTF-8로 보내야 합니다.
+필수 기능 12개를 Postman으로 순서대로 확인할 수 있는 컬렉션을 [`docs/postman/delivery.postman_collection.json`](docs/postman/delivery.postman_collection.json)에 두었습니다. 요청 50개가 회원 → 메뉴 → 주문·결제 → 주문 취소 → 메뉴 삭제 순서로 들어 있고, 각 요청에 기대 상태 코드 검증이 붙어 있습니다.
+
+### 사용 방법
+
+1. 앱과 DB를 먼저 띄웁니다(위 "실행 방법" 참고).
+2. Postman에서 **Import**로 위 JSON 파일을 불러옵니다.
+3. 컬렉션의 `⋯` → **Run collection** → **Run**으로 전체를 한 번에 실행하거나, 폴더 안 요청을 위에서 아래로 하나씩 **Send**합니다.
+4. 로그인 응답의 토큰과 메뉴·주문 ID는 컬렉션 변수에 자동 저장되므로 따로 복사하지 않아도 됩니다.
+
+### 참고
+
+- 회원가입은 이미 같은 아이디가 있으면 409가 나므로, 처음부터 다시 실행하려면 DB를 비웁니다.
+  ```bash
+  docker exec delivery-db psql -U delivery -d delivery -c "truncate users restart identity cascade"
+  ```
+- 요청 본문에 한글이 들어가면 UTF-8로 보내야 합니다(Postman은 기본 UTF-8).
+- Postman 없이 명령줄에서 돌리려면 `npx newman run docs/postman/delivery.postman_collection.json`을 쓸 수 있습니다.

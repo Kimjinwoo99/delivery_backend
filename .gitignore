@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Postman (앱이 자동 생성하는 로컬 워크스페이스 파일) ###
+/.postman/
+/postman/
